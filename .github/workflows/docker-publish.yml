@@ -10,7 +10,8 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  BASE_IMAGE_NAME: ${{ github.repository }}
+  CPP_IMAGE_NAME: ${{ github.repository }}/_cpp 
 
 
 jobs:
@@ -30,8 +31,10 @@ jobs:
      
       - name: Build Docker image
         run: |
-         docker build . --tag  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+         docker build . --tag  ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}:latest
+         docker build . --tag  ${{ env.REGISTRY }}/${{ env.CPP_IMAGE_NAME }}:latest
          
       - name: Push Docker image
         run: |
-         docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
+         docker push ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}:latest 
+         docker push ${{ env.REGISTRY }}/${{ env.CPP_IMAGE_NAME }}:latest 

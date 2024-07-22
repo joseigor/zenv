@@ -4,6 +4,7 @@ set -eu
 
 . ./project_config.sh
 
+BUILD_DOCKERFILE=${BUILD_DOCKERFILE:-.}
 BUILD_IMAGE_NAME=${BUILD_IMAGE_NAME:-$PROJECT_NAME}
 BUILD_CONTAINER_NAME=${BUILD_CONTAINER_NAME:-$PROJECT_NAME"-builder-container"}
 
@@ -25,7 +26,8 @@ create_builder_container() {
 
 	echo "info" "Will create builder container and run in detached mode."
 
-	docker build --build-arg WORKDIR_PATH="${PROJECT_NAME}" -t "${BUILD_IMAGE_NAME}" .
+	docker build --build-arg WORKDIR_PATH="${PROJECT_NAME}" -t "${BUILD_IMAGE_NAME}" -f "${BUILD_DOCKERFILE}" .
+
 
 	if [ "$(docker ps -a -q -f name="${BUILD_CONTAINER_NAME}")" ]; then
 		docker rm -f "${BUILD_CONTAINER_NAME}" > /dev/null
@@ -64,8 +66,7 @@ run_builder_container() {
 
 
 docker_clean_all() {
-
-	echo "info" "Will remove all docker containers and images."
+echo "info" "Will remove all docker containers and images."
 
 	# remove builder
 	if [ "$(docker ps -q -f status=running -f name="${BUILD_CONTAINER_NAME}")" ]; then

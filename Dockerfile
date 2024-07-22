@@ -13,7 +13,8 @@ RUN \
     curl \
     file \
     git \
-    vim
+    vim \
+    tmux
     
 # vim configuration
 ## install vim-plug

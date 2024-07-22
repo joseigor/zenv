@@ -4,7 +4,7 @@ set -eu
 
 . ./project_config.sh
 
-BUILD_DOCKERFILE=${BUILD_DOCKERFILE:-.}
+DOCKERFILE=${DOCKERFILE:-.}
 BUILD_IMAGE_NAME=${BUILD_IMAGE_NAME:-$PROJECT_NAME}
 BUILD_CONTAINER_NAME=${BUILD_CONTAINER_NAME:-$PROJECT_NAME"-builder-container"}
 
@@ -26,7 +26,7 @@ create_builder_container() {
 
 	echo "info" "Will create builder container and run in detached mode."
 
-	docker build --build-arg WORKDIR_PATH="${PROJECT_NAME}" -t "${BUILD_IMAGE_NAME}" -f "${BUILD_DOCKERFILE}" .
+	docker build --build-arg WORKDIR_PATH="${PROJECT_NAME}" -t "${BUILD_IMAGE_NAME}" --file "${DOCKERFILE}" .
 
 
 	if [ "$(docker ps -a -q -f name="${BUILD_CONTAINER_NAME}")" ]; then

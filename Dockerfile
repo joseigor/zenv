@@ -3,7 +3,7 @@ FROM alpine:latest
 LABEL maintainer="joseigorcfm@gmail.com"
 
 
-ARG WORKDIR_PATH=/app
+ARG WORKDIR_PATH
 WORKDIR ${WORKDIR_PATH}
 
 

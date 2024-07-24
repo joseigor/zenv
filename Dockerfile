@@ -12,6 +12,7 @@ RUN \
     vim \
     tmux
 
+# basic C/C++ toolchain
 RUN \
     apk add --no-cache \
     cmake \
@@ -21,19 +22,37 @@ RUN \
     musl-dev \
     valgrind    
 
-# vim configuration
-## copy vim configuration file
+#------- START: vim configuration -------#
+
+# copy vim configuration file
 COPY ./dotfiles/.vimrc /root
-## install vim-plug
+
+# install vim-plug
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-## cofigure coc.nvim
+
+## needed by coc.nvim
 RUN \
     apk add --no-cache \
     nodejs \
-    npm \
+    npm
+
+# needed by coc-clangd for C++ autocompletition and lint
+RUN \
+    apk add --no-cache \
     clang \
-    clang-extra-tools # to get clangd
-## install all the plugins
+    clang-extra-tools
+
+# needed to run the FZF :Rg and :Ag commands
+RUN \
+    apk add --no-cache \
+    ripgrep \
+    the_silver_searcher 
+
+# install all the plugins
 RUN vim -c 'PlugInstall --sync' -c qa 
+
+# install coc-clangd in vim
 RUN vim -c 'CocInstall -sync coc-clangd|q' 
+
+#------- END: vim configuration -------#

@@ -3,9 +3,8 @@ FROM alpine:latest as base
 ARG WORKDIR_PATH
 WORKDIR ${WORKDIR_PATH}
 
-RUN echo "http://mirror.fel.cvut.cz/alpine/v3.20/main" >  /etc/apk/repositories \
-    && echo "http://mirror.fel.cvut.cz/alpine/v3.20/community" >> /etc/apk/repositories \
-    && apk add --no-cache \
+RUN \
+    apk add --no-cache \
     bash \
     curl \
     ctags \

@@ -58,7 +58,8 @@ nnoremap  <leader>sch
 set termguicolors
 set background=dark
 let g:gruvbox_contrast_dark = 'medium'
-colorscheme gruvbox
+" colorschema gruvbox is raising an error if called from here, so it needs to
+" be called from the command : colorschema gruvbox
 "-------------------- end: gruvbox configuration --------------------------
 
 "-------------------- start: coc.nvim configuration --------------------------

@@ -15,7 +15,6 @@ set mouse=a
 set spelllang=en
 set spell
 set listchars=eol:$,space:-,tab:>#,trail:~
-colorscheme delek 
 
 " FILE BROWSING
 let g:netrw_altv = 1                           " changes from left splitting to right splitting
@@ -27,12 +26,11 @@ let g:netrw_list_hide = netrw_gitignore#Hide() " does not show file ignored by g
 
 " PLUGINS
 call plug#begin()
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 
@@ -41,6 +39,10 @@ call plug#end()
 noremap <leader>e :Vexplore <CR> 
 " map F5 to show/hide list
 nmap <F5> :set list! list?<cr>
+" Normal mode mapping for <C-f>
+nnoremap <C-f> :Files<CR>
+" Insert mode mapping for <C-f>
+inoremap <C-f> <Esc>:w<CR>:Files<CR>a
 
 " COMMANDS
 " create ctags
@@ -51,6 +53,13 @@ command! MakeTags !ctags -R .
 nnoremap  <leader>sch   
 	\ :-1read $HOME/.vim/snippets/cpp/hearder-def.snippet<CR>
 	\ 3j
+
+"-------------------- start: gruvbox configuration --------------------------
+set termguicolors
+set background=dark
+let g:gruvbox_contrast_dark = 'medium'
+colorscheme gruvbox
+"-------------------- end: gruvbox configuration --------------------------
 
 "-------------------- start: coc.nvim configuration --------------------------
 " NOTE: If coc.nvim is not needed lines below can be removed

@@ -62,7 +62,33 @@ let g:gruvbox_contrast_dark = 'medium'
 " be called from the command : colorschema gruvbox
 "-------------------- end: gruvbox configuration --------------------------
 
-"-------------------- start: coc.nvim configuration --------------------------
+"-------------------- start: IDE configuration --------------------------
+function! SetupIde()
+    " Set the colorscheme to Gruvbox
+    colorscheme gruvbox
+
+    " Close any existing windows, except the current one
+    execute 'only'
+
+    " Split the screen into three vertical windows
+    execute 'vsplit'
+    execute 'vsplit'
+
+    " Move to the leftmost window
+    execute 'wincmd h'
+
+    " Focus the first window
+    execute 'wincmd h'
+endfunction
+
+" Define the SetupIde command
+command! SetupIde call SetupIde()
+
+" Automatically run SetupIde when Vim starts
+autocmd vimenter * ++nested SetupIde
+"-------------------- end: IDE configuration --------------------------
+
+"-------------------- start: coc.nvim configuration -------------------
 " NOTE: If coc.nvim is not needed lines below can be removed
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count

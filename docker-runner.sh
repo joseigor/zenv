@@ -36,6 +36,7 @@ create_builder_container() {
 	docker \
 		run \
 		-it \
+		--publish 8080:8080 \
 		-v $(pwd):/${PROJECT_NAME} \
 		--name "${BUILD_CONTAINER_NAME}" \
 		-d "${BUILD_IMAGE_NAME}"

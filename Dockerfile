@@ -3,6 +3,8 @@ FROM alpine:latest as base
 ARG WORKDIR_PATH
 WORKDIR ${WORKDIR_PATH}
 
+ENV  HOME /root
+
 RUN \
     apk add --no-cache \
     bash \
@@ -23,10 +25,22 @@ RUN \
     musl-dev \
     valgrind 
 
+#------- START: PlantUml server configuration -------#
+RUN \
+    apk add --no-cache \
+	graphviz \
+	openjdk21 
+COPY ./home/lib/java $HOME/lib/java
+COPY ./home/bin/pugen.sh /bin/pugen.sh
+COPY ./home/bin/simple-server.sh /bin/simple-server.sh
+# port to expose .plantuml folder that contains the generated .png files 
+EXPOSE 8080
+#------- END: PlantUml server configuration -------#
+
 #------- START: vim configuration -------#
 ## copy vim configuration file
-COPY ./dotfiles/.vimrc /root
-COPY ./dotfiles/.vim/ /root/.vim
+COPY ./home/.vimrc $HOME/.vimrc
+COPY ./home/.vim/ $HOME/.vim
 
 ## install vim plugin
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

@@ -14,6 +14,8 @@ set smartindent
 set mouse=a
 set spelllang=en
 set spell
+" Set the highlight for spelling errors (SpellBad)
+highlight SpellBad term=underline cterm=underline ctermfg=Red gui=underline guifg=Red
 set listchars=eol:$,space:-,tab:>#,trail:~
 
 " FILE BROWSING

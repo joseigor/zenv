@@ -37,6 +37,7 @@ create_builder_container() {
 		run \
 		-it \
 		--publish 8080:8080 \
+		--publish 8081:8081 \
 		-v $(pwd):/${PROJECT_NAME} \
 		--name "${BUILD_CONTAINER_NAME}" \
 		-d "${BUILD_IMAGE_NAME}"

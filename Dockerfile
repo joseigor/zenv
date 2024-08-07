@@ -12,6 +12,8 @@ RUN \
     ctags \
     file \
     git \
+    python3 \
+    py3-pip \
     vim \
     tmux
 
@@ -24,6 +26,11 @@ RUN \
     make \
     musl-dev \
     valgrind 
+
+#------- START: markdown server configuration -------#
+EXPOSE 8081
+COPY ./home/bin/markdown-server.sh /bin/markdown-serve.sh
+#------- END: markdonw server configuration -------#
 
 #------- START: PlantUml server configuration -------#
 RUN \

@@ -22,14 +22,6 @@ set listchars=eol:$,space:-,tab:>#,trail:~
 set ignorecase
 set smartcase
 
-" FILE BROWSING
-let g:netrw_altv = 1                           " changes from left splitting to right splitting
-let g:netrw_browse_split = 4                   " open in prior window
-let g:netrw_banner = 0                         " gets rid of the top banner
-let g:netrw_liststyle = 3                      " sets tree stile view
-let g:netrw_winsize = 30                       " set the window size when netrw opens
-let g:netrw_list_hide = netrw_gitignore#Hide() " does not show file ignored by git in the explorer
-
 "-------------------- start: PLUGINS --------------------
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
